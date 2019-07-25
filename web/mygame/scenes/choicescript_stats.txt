@@ -1,0 +1,13 @@
+These are your settings
+
+Risk Assessment
+*stat_chart
+  opposed_pair Equities
+    Bonds
+
+Portfolio
+
+*stat_chart
+  percent eqval1 ${eqname1}
+  percent eqval2 ${eqname2}
+  percent bonds ${bondname}

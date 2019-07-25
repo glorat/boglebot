@@ -1,0 +1,39 @@
+This advisor recommends your equity allocation be passively allocated across the entire world, weighted by global market capitalization
+
+We'll then help you find the low cost ways of achieving this
+
+For now, we assume you have 0% tax on dividends and 0% tax on capital gains and are affected by the typical 30% withholding tax on US dividends
+
+We assume you will use ETFs to create your portfolio
+
+For equities, there are three recommended ways of buying the global market
+
+For more help on which choice to take see... TODO list
+
+*choice
+  #Vanguard All World - VWRD (TER 0.25%)
+    *set eqname1 "VWRD"
+    *set eqval1 equities
+    *goto review
+  #A combination of IWDA and EIMI (TER 0.2%???)
+    *set eqname1 "IWDA"
+    *set eqname2 "EIMI"
+    *set eqval1 round((88*equities)/100)
+    *set eqval2 round((12*equities)/100)
+    *goto review
+  #A combination of SWDA and EIMI (TER 0.18%??)
+    *set eqname1 "SWDA"
+    *set eqname2 "EIMI"
+    *set eqval1 round((88*equities)/100)
+    *set eqval2 round((12*equities)/100)
+    *goto review
+
+*label review
+The equity portion of your portfolio is set to
+
+*stat_chart
+  percent eqval1 ${eqname1}
+  percent eqval2 ${eqname2}
+
+
+*finish

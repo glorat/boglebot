@@ -1,0 +1,36 @@
+*comment Copyright 2019 by Kevin Tam.
+
+*title International Boglebot Investment Game
+*author Kevin Tam
+*scene_list
+  startup
+  risklevel
+  equities
+  bonds
+  ending
+
+*create equities 50
+*create bonds 50
+*create bondname "bonds"
+*create eqname1 "vwrd"
+*create eqname2 "other"
+*create eqval1 0
+*create eqval2 0
+
+Welcome an unofficial Boglebot investment game!
+
+In this game will be guided by your friendly Boglebot financial advisor to help you set an asset allocation for your investments and (in a future release) see how your portfolio performs
+
+*page_break
+
+What country do you pay your taxes to? This is typically your tax residency but if you are a US person then choose US.
+*choice
+  #Hong Kong/Singapore
+    Great! No capital gains or dividend taxes to worry about
+    *finish
+  #United States.
+    There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
+    *goto_scene Ending
+  #Other country
+    One day, we'll support you too
+    *goto_scene Ending

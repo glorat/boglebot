@@ -1,0 +1,45 @@
+The purpose of bonds in your portfolio is to (paste BH advice here)
+
+This game will recommend global bonds hedged back to your local currency. (More options to come in a future release)
+
+*if bonds = 0
+  But since you don't need a bond allocation, we can skip this section
+  *finish
+
+What is the currency you spend most in?
+
+*choice
+  #USD - US Dollars
+    Dollars it is! The ETF AGGU is an iShares fund that.... and is hedged to USD.
+    *set bondname "AGGU"
+    *goto review
+  #GBP - UK Pounds Sterling
+    Sterling it is! The ETF AGBP is an iShares fund that.... and is hedged to GBP.
+    *set bondname "AGBP"
+    *goto review
+  #EUR - Euro
+    Euro it is! The ETF AGGH is an iShares fund that.... and is hedged to AGGH.
+    *set bondname "AGGH"
+    *goto review
+  #Other
+    I don't know of bond etfs hedged to your currency. You may look at local currency bond options. I can only suggest
+    *choice
+      #USD - It is the strongest currency available and safest to hedge to
+        *set bondname "AGGU"
+        *goto review
+      #I don't care - any mix of currencies works for me
+        *goto nomad
+  #I'm an international nomad and spend all over the world
+    *label nomad
+    In that case, your global bond portfolio does not need hedging to any currency. The ETF AGGG is an iShares fund that...
+    *set bondname "AGGG"
+    *goto review
+
+*label review
+
+The bond portion of your portfolio is set to
+
+*stat_chart
+  percent bonds ${bondname}
+
+*finish

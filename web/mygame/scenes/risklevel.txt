@@ -1,0 +1,17 @@
+What is your risk tolerance?
+
+TODO: we'll ask multiple choice questions to help you determine your risk level
+
+*choice
+  #Very high - 100% equities
+    *set equities 100
+    *set bonds 0
+    *finish
+  #High - 80% equities
+    *set equities 80
+    *set bonds 20
+    *finish
+  #Moderate - 60% equities
+    *set equities 60
+    *set bonds 40
+    *finish

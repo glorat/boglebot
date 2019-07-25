@@ -1,0 +1,13 @@
+This is the end of the game!
+
+Your investment portfolio is
+
+*stat_chart
+  percent eqval1 ${eqname1}
+  percent eqval2 ${eqname2}
+  percent bonds ${bondname}
+
+
+*choice
+  #Return to start
+    *goto_scene startup
