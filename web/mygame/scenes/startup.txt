@@ -30,7 +30,7 @@ What country do you pay your taxes to? This is typically your tax residency but 
     *finish
   #United States.
     There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
-    *goto_scene Ending
+    *goto_scene ending
   #Other country
     One day, we'll support you too
-    *goto_scene Ending
+    *goto_scene ending

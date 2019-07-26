@@ -15,13 +15,13 @@ For more help on which choice to take see... TODO list
     *set eqname1 "VWRD"
     *set eqval1 equities
     *goto review
-  #A combination of IWDA and EIMI (TER 0.2%???)
+  #A combination of IWDA and EIMI (TER 0.20%)
     *set eqname1 "IWDA"
     *set eqname2 "EIMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
     *goto review
-  #A combination of SWDA and EIMI (TER 0.18%??)
+  #A combination of SWDA and EIMI (TER 0.18%)
     *set eqname1 "SWDA"
     *set eqname2 "EIMI"
     *set eqval1 round((88*equities)/100)
