@@ -1,6 +1,6 @@
 This is the end of the game!
 
-Your investment portfolio is
+Your chosen investment portfolio
 
 *stat_chart
   percent eqval1 ${eqname1}

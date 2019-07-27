@@ -4,11 +4,82 @@ We'll then help you find the low cost ways of achieving this
 
 For now, we assume you have 0% tax on dividends and 0% tax on capital gains and are affected by the typical 30% withholding tax on US dividends
 
-We assume you will use ETFs to create your portfolio
+*label strategy
+What investing strategy would you like to try?
+*choice
+    #Passive index funds
+        Great choice! Passive funds are recommended by Bogleheads due to their low cost
+ 
+        *goto etfchoice
+    #Actively managed funds
+        Actively managed funds have higher fees than passive funds. Are you sure you wish to proceed with choosing an active fund?
+        *choice
+            #Yes - active funds
+                You invest your money in an active fund. 20 years later you realise that the odds of an active fund outperforming a passive index fund iess less than 1%. You enter your retirement in regret
+                
+             *goto_scene ending
+            #No - try something else
+                 Let's try something else
+                 
+                 *goto strategy
+    #Pick individual stocks
+        Unfortunately,
+        *link https://jlcollinsnh.com/2011/06/02/why-i-cant-pick-winning-stocks-and-you-cant-either/ I can't pick winning stocks and you can't either
+        . There are professionals that do make a living picking stocks. They are the people running actively managed funds. Since I can't help you pick stocks, try another strategy
+        
+        *goto strategy
 
-For equities, there are three recommended ways of buying the global market
+*label etfchoice
+We assume you will use exchange traded funds (ETFs) to create your portfolio
 
-For more help on which choice to take see... TODO list
+What type of ETF shall we go for?
+
+*choice
+    #Global index fund
+        *goto globalindex
+    #Local market index fund
+        By concentrating to just your local market, you are not really diversifying your portfolio and are leaving yourself with high concentration risk in the single country of your choice
+        
+        *goto etfchoice
+    #Follow the most popular ETF sectors
+        ETFs that target specific portions of the market have typically higher costs compared to passive global index trackers. But trying to follow what is popular is a common strategy
+        *choice
+            #Proceed with following ETF trends
+                You invest in yourself like an average investor. Over time, this is how you did compared to just to sticking with passive finds
+                
+                *image averageinvestor.jpg
+                
+                *goto_scene ending
+            #Try something else
+                *goto etfchoice
+        
+
+*label globalindex
+For equities, there are three recommended ways of buying the global market, depending on what you prefer
+
+A single ETF fund that covers the global market, run by a company owned by ETF share owners, thus acting in your best interests
+
+Based on the largest most popular ETF in its class, run by a profit making company but requires you to manage two ETFs
+
+Based on the cheapest ETF in its class, run by a profit making company, also requiring you to manage two ETFs
+
+*choice
+    #Single fund (recommended)
+        Then I recommend the Vanguard FTSE All World ETF. The fund has an expense ratio of 0.25%
+        
+        *goto chooseglobal
+    #Most popular fund
+        The iShares Core MSCI World ETF (IWDA) is the most popular ETF in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.20%
+        
+        *goto chooseglobal
+    #Cheapest fund
+        The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.18%.
+        
+        *goto chooseglobal
+
+*label chooseglobal
+
+But ultimately, it is up to you to choose which fund you want
 
 *choice
   #Vanguard All World - VWRD (TER 0.25%)
@@ -27,7 +98,9 @@ For more help on which choice to take see... TODO list
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
     *goto review
-
+  #Give me more advice
+      *goto globalindex
+  
 *label review
 The equity portion of your portfolio is set to
 

@@ -1,6 +1,6 @@
 *comment Copyright 2019 by Kevin Tam.
 
-*title International Boglebot Investment Game
+*title The International Boglebot
 *author Kevin Tam
 *scene_list
   startup
@@ -10,7 +10,7 @@
   ending
 
 *create equities 50
-*create bonds 50
+*create bonds 0
 *create bondname "bonds"
 *create eqname1 "vwrd"
 *create eqname2 "other"
@@ -28,9 +28,17 @@ What country do you pay your taxes to? This is typically your tax residency but 
   #Hong Kong/Singapore
     Great! No capital gains or dividend taxes to worry about
     *finish
-  #United States.
-    There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
+  #Japan
+      Due to favorable tax treaties with the US, you can invest in US domiciled ETFs just like a US person.
+      
+      *goto usperson
+  #United States
+      *label usperson
+    Unfortunately, helping US persons is beyond me! There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
+    
     *goto_scene ending
   #Other country
-    One day, we'll support you too
-    *goto_scene ending
+    I don't have specific advice for other countries as yet. See *link https://www.bogleheads.org/wiki/Nonresident_alien%27s_ETF_domicile_decision_table
+    for general advice. Since I don't know any better, I will assume you don't have a favourable tax treaty with the US on both dividend witholding taxes and estate taxes. Therefore, recommendations will be limited to Ireland domiciled ETFs that have favourable treatment.
+    
+    *finish
