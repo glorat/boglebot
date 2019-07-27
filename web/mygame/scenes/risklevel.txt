@@ -1,3 +1,5 @@
+*comment Copyright 2019 by Kevin Tam.
+
 What is your risk tolerance?
 
 TODO: we'll ask multiple choice questions to help you determine your risk level

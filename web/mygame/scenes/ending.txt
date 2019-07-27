@@ -1,3 +1,5 @@
+*comment Copyright 2019 by Kevin Tam.
+
 This is the end of the game!
 
 Your chosen investment portfolio

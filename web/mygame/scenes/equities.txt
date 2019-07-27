@@ -1,3 +1,5 @@
+*comment Copyright 2019 by Kevin Tam.
+
 This advisor recommends your equity allocation be passively allocated across the entire world, weighted by global market capitalization
 
 We'll then help you find the low cost ways of achieving this
@@ -85,18 +87,21 @@ But ultimately, it is up to you to choose which fund you want
   #Vanguard All World - VWRD (TER 0.25%)
     *set eqname1 "VWRD"
     *set eqval1 equities
+    *set eqter 25
     *goto review
   #A combination of IWDA and EIMI (TER 0.20%)
     *set eqname1 "IWDA"
     *set eqname2 "EIMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
+    *set eqter 20
     *goto review
   #A combination of SWDA and EIMI (TER 0.18%)
     *set eqname1 "SWDA"
     *set eqname2 "EIMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
+    *set eqter 18
     *goto review
   #Give me more advice
       *goto globalindex
@@ -107,6 +112,8 @@ The equity portion of your portfolio is set to
 *stat_chart
   percent eqval1 ${eqname1}
   percent eqval2 ${eqname2}
+*temp cost (eqter*amount)/10000
 
+The fund manager will earn 0.${eqter}% a year or ${cost} a year
 
 *finish

@@ -1,3 +1,5 @@
+*comment Copyright 2019 by Kevin Tam.
+
 The purpose of bonds in your portfolio is to (paste BH advice here)
 
 This game will recommend global bonds hedged back to your local currency. (More options to come in a future release)

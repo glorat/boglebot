@@ -9,6 +9,7 @@
   bonds
   ending
 
+*create amount 1
 *create equities 50
 *create bonds 0
 *create bondname "bonds"
@@ -16,13 +17,29 @@
 *create eqname2 "other"
 *create eqval1 0
 *create eqval2 0
+*create eqter 0
 
 Welcome an unofficial Boglebot investment game!
 
 In this game will be guided by your friendly Boglebot financial advisor to help you set an asset allocation for your investments and (in a future release) see how your portfolio performs
 
-*page_break
+How much money (in your currency) will you invest?
+*choice
+    # 1,000,000
+        *set amount 1000000
+        *goto country
+    # 100,000
+        *set amount 100000
+        *goto country
+    # 10,000
+        *set amount 10000
+        *goto country
+    # Other
+        Enter the amount you will invest
+        *input_number amount 0 1000000000
+        *goto country
 
+*label country
 What country do you pay your taxes to? This is typically your tax residency but if you are a US person then choose US.
 *choice
   #Hong Kong/Singapore
