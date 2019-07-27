@@ -2,18 +2,38 @@
 
 What is your risk tolerance?
 
-TODO: we'll ask multiple choice questions to help you determine your risk level
+One day I will guide you through this but for now please visit 
+*link https://personal.vanguard.com/us/FundsInvQuestionnaire
+and 
+*link https://www.bogleheads.org/wiki/Asset_allocation
+to guide yourself to an answer
 
 *choice
   #Very high - 100% equities
     *set equities 100
     *set bonds 0
-    *finish
+    *goto wrapup
   #High - 80% equities
     *set equities 80
     *set bonds 20
-    *finish
+    *goto wrapup
   #Moderate - 60% equities
     *set equities 60
     *set bonds 40
-    *finish
+    *goto wrapup
+  #Cautious - 40% equities
+    *set equities 40
+    *set bonds 60
+    *goto wrapup
+  #Moderate - 20% equities
+    *set equities 20
+    *set bonds 80
+    *goto wrapup
+  # Custom
+    Enter your equity allocation percentage (0-100)
+    *input_number equities 0 100
+    *set bonds 100-equities
+    *goto wrapup
+
+*label wrapup
+*set bonds 100-equities

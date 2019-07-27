@@ -14,20 +14,24 @@ What is the currency you spend most in?
   #USD - US Dollars
     Dollars it is! The ETF AGGU is an iShares fund that.... and is hedged to USD.
     *set bondname "AGGU"
+    *set bondter 10
     *goto review
   #GBP - UK Pounds Sterling
     Sterling it is! The ETF AGBP is an iShares fund that.... and is hedged to GBP.
     *set bondname "AGBP"
+    *set bondter 10
     *goto review
   #EUR - Euro
     Euro it is! The ETF AGGH is an iShares fund that.... and is hedged to AGGH.
     *set bondname "AGGH"
+    *set bondter 10
     *goto review
   #Other
     I don't know of bond etfs hedged to your currency. You may look at local currency bond options. I can only suggest
     *choice
       #USD - It is the strongest currency available and safest to hedge to
         *set bondname "AGGU"
+        *set bondter 10
         *goto review
       #I don't care - any mix of currencies works for me
         *goto nomad
@@ -35,6 +39,7 @@ What is the currency you spend most in?
     *label nomad
     In that case, your global bond portfolio does not need hedging to any currency. The ETF AGGG is an iShares fund that...
     *set bondname "AGGG"
+    *set bondter 10
     *goto review
 
 *label review
@@ -43,5 +48,9 @@ The bond portion of your portfolio is set to
 
 *stat_chart
   percent bonds ${bondname}
+
+*temp cost ((bonds*eqter)*amount)/1000000
+
+The fund manager will earn 0.${bondter}% a year on your equity portfolio, which works out to ${cost} a year
 
 *finish

@@ -18,6 +18,7 @@
 *create eqval1 0
 *create eqval2 0
 *create eqter 0
+*create bondter 0
 
 Welcome an unofficial Boglebot investment game!
 

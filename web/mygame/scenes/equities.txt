@@ -112,8 +112,8 @@ The equity portion of your portfolio is set to
 *stat_chart
   percent eqval1 ${eqname1}
   percent eqval2 ${eqname2}
-*temp cost (eqter*amount)/10000
+*temp cost ((equities*eqter)*amount)/1000000
 
-The fund manager will earn 0.${eqter}% a year or ${cost} a year
+The fund manager will earn 0.${eqter}% a year on your equity portfolio, which works out to ${cost} a year
 
 *finish
