@@ -2,7 +2,8 @@
 
 The purpose of bonds in your portfolio is to (paste BH advice here)
 
-This game will recommend global bonds hedged back to your local currency. (More options to come in a future release)
+This game will recommend global bonds hedged back to your local spending currency. This is based both on my opinion and that of Vanguard's: 
+*link https://personal.vanguard.com/pdf/ISGGLBD.pdf
 
 *if bonds = 0
   But since you don't need a bond allocation, we can skip this section
@@ -12,17 +13,17 @@ What is the currency you spend most in?
 
 *choice
   #USD - US Dollars
-    Dollars it is! The ETF AGGU is an iShares fund that.... and is hedged to USD.
+    Dollars it is! The ETF AGGU is an iShares fund that covers global bonds and is hedged to USD.
     *set bondname "AGGU"
     *set bondter 10
     *goto review
   #GBP - UK Pounds Sterling
-    Sterling it is! The ETF AGBP is an iShares fund that.... and is hedged to GBP.
+    Sterling it is! The ETF AGBP is an iShares fund that covers global bonds  and is hedged to GBP.
     *set bondname "AGBP"
     *set bondter 10
     *goto review
   #EUR - Euro
-    Euro it is! The ETF AGGH is an iShares fund that.... and is hedged to AGGH.
+    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to AGGH.
     *set bondname "AGGH"
     *set bondter 10
     *goto review
@@ -37,7 +38,7 @@ What is the currency you spend most in?
         *goto nomad
   #I'm an international nomad and spend all over the world
     *label nomad
-    In that case, your global bond portfolio does not need hedging to any currency. The ETF AGGG is an iShares fund that...
+    In that case, your global bond portfolio does not need hedging to any currency. The ETF AGGG is an iShares fund that covers global bonds.
     *set bondname "AGGG"
     *set bondter 10
     *goto review

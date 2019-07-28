@@ -1,0 +1,3 @@
+Files inside the "web" directory are licensed from their authors under the CHOICESCRIPT LICENSE (CSL) v1.0, except for files under the "scenes" subfolder
+
+Files inside the "scenes" subfolder are copyright Kevin Tam and licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
