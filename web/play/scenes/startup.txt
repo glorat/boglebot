@@ -1,7 +1,7 @@
 *comment Copyright 2019 by Kevin Tam.
 
 *title The International Boglebot
-*author Kevin Tam
+*author community fans of Jack Bogle
 *scene_list
   startup
   risklevel
@@ -56,7 +56,8 @@ What country do you pay your taxes to? This is typically your tax residency but 
     
     *goto_scene ending
   #Other country
-    I don't have specific advice for other countries as yet. See *link https://www.bogleheads.org/wiki/Nonresident_alien%27s_ETF_domicile_decision_table
+    I don't have specific advice for other countries as yet. See
+    *link https://www.bogleheads.org/wiki/Nonresident_alien%27s_ETF_domicile_decision_table
     for general advice. Since I don't know any better, I will assume you don't have a favourable tax treaty with the US on both dividend witholding taxes and estate taxes. Therefore, recommendations will be limited to Ireland domiciled ETFs that have favourable treatment. For investments under 60,000 USD, your country may have other reasonable options.
     
     *finish
