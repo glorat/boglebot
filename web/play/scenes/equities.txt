@@ -47,7 +47,7 @@ What type of ETF shall we go for?
         ETFs that target specific portions of the market have typically higher costs compared to passive global index trackers. But trying to follow what is popular is a common strategy
         *choice
             #Proceed with following ETF trends
-                You invest in yourself like an average investor. Over time, this is how you did compared to just to sticking with passive finds
+                You invest in yourself like an average investor. Over time, this is how you did compared to just to sticking with passive funds
                 
                 *image averageinvestor.jpg
                 
@@ -84,11 +84,20 @@ Based on the cheapest ETF in its class, run by a profit making company, also req
 But ultimately, it is up to you to choose which fund you want
 
 *choice
-  #Vanguard All World - VWRD (TER 0.25%)
-    *set eqname1 "VWRD"
-    *set eqval1 equities
-    *set eqter 25
-    *goto review
+  #Vanguard All World - VWRD/VWRA (TER 0.25%)
+      There are accumulating and distributing versions of this ETF. See *link https://www.bogleheads.org/wiki/Comparison_of_accumulating_ETFs_and_distributing_ETFs
+      for help on which is best for you. Usually the accumulating version is preferred unless there is some tax consideration or you wish to spend the dividend income
+      *choice
+          #Accumulating - VWRA (TER 0.25%)
+            *set eqname1 "VWRA"
+            *set eqval1 equities
+            *set eqter 25
+            *goto review
+        #Distributing - VWRD (TER 0.25%)
+            *set eqname1 "VWRD"
+            *set eqval1 equities
+            *set eqter 25
+            *goto review
   #A combination of IWDA and EIMI (TER 0.20%)
     *set eqname1 "IWDA"
     *set eqname2 "EIMI"
