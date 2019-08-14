@@ -54,7 +54,8 @@ What country do you pay your taxes to? This is typically your tax residency but 
       *label usperson
     Unfortunately, helping US persons is beyond me! There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
     
-    *goto_scene ending
+    *gosub_scene contributing
+    *goto country
   #Other country
     I don't have specific advice for other countries as yet. See
     *link https://www.bogleheads.org/wiki/Nonresident_alien%27s_ETF_domicile_decision_table

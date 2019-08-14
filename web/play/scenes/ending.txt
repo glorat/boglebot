@@ -9,6 +9,11 @@ Your chosen investment portfolio
   percent eqval2 ${eqname2}
   percent bonds ${bondname}
 
+What next?
+
+Go to
+*link https://www.bogleheads.org/forum/viewforum.php?f=22 boglehead forum
+create a thread, posting your investment needs and the boglebot suggestions
 
 *choice
   #Return to start

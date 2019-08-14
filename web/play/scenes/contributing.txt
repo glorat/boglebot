@@ -1,0 +1,13 @@
+*comment Copyright 2019 by Kevin Tam.
+
+The boglebot is unable to help on this topic. But perhaps you are an expert that can teach me?
+
+My knowledge maintained at
+*link https://github.com/glorat/boglebot/tree/master/web/play/scenes
+
+Pull-requests and contributions there are welcome! If that is too technical, visit this thread on the bogleheads forum
+*link https://www.bogleheads.org/forum/viewtopic.php?f=22&t=286518
+
+*page_break Go back
+
+*return

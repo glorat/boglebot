@@ -9,6 +9,7 @@ This game will recommend global bonds hedged back to your local spending currenc
   But since you don't need a bond allocation, we can skip this section
   *finish
 
+*label aggg
 What is the currency you spend most in?
 
 *choice
@@ -42,6 +43,8 @@ What is the currency you spend most in?
     *set bondname "AGGG"
     *set bondter 10
     *goto review
+  #I want more advanced bond index strategies
+    *goto adv_bond
 
 *label review
 
@@ -55,3 +58,33 @@ The bond portion of your portfolio is set to
 The fund manager will earn 0.${bondter}% a year on your equity portfolio, which works out to ${cost} a year
 
 *finish
+
+*label adv_bond
+I can recommend 4 general bond index strategies for consideration
+
+[b]1) Global Aggregate Bond (AGGG variants) [/b]
+
+Barclays global index that includes govts and corporates with credit ratings from AAA to BBB. This is the most diversified bond portfolio (and thus recommended)
+
+
+[b]2) Global Govt Bond (IGLO variants)[/b]
+
+Like 1) but without the corporates - Governments only. By being higher grade than 1), it may have better inverse correlation with your equity portfolio (i.e. help diversify your portfolilo as a whole)
+
+
+[b]3) Global AAA-AA (IAAA variants)[/b]
+
+Like 2) but only high grade bonds, thus excluding governments like Italy.
+
+
+[b]4) Local only government bonds[/b]
+
+Some efficient market theory says obtaining the risk free rate of interest won't matter if it is local or globally but hedged back. Thus if you can get purely local currency bonds at lower cost, you may save on expense fees
+
+*choice
+  #Global Aggregate Bond Index
+    Thank you for choosing the main recommendation
+    *goto aggg
+  #TODO
+    *gosub_scene contributing
+    *goto adv_bond
