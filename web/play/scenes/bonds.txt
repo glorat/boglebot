@@ -15,24 +15,31 @@ What is the currency you spend most in?
 *choice
   #USD - US Dollars
     Dollars it is! The ETF AGGU is an iShares fund that covers global bonds and is hedged to USD.
-    *set bondname "AGGU"
+    *set bondname "AGGU iShares Core Global Aggregate Bond (USD Hedged)"
     *set bondter 10
     *goto review
   #GBP - UK Pounds Sterling
-    Sterling it is! The ETF AGBP is an iShares fund that covers global bonds  and is hedged to GBP.
-    *set bondname "AGBP"
+    I offer you three choices.
+    
+    1) The ETF AGBP is 
+    *link http://www.morningstar.co.uk/uk/etf/snapshot/snapshot.aspx?id=0P0001C9YI iShares Global Aggregate Bond UCITS 
+    that covers global bonds  and is hedged to GBP.
+    
+    2) 
+    Sterling it is! 
+    *set bondname "AGBP - iShares Core Global Aggregate Bond (GBP Hedged)"
     *set bondter 10
     *goto review
   #EUR - Euro
-    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to AGGH.
-    *set bondname "AGGH"
+    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to EUR.
+    *set bondname "AGGH iShares Core Global Aggregate Bond (EUR Hedged)"
     *set bondter 10
     *goto review
   #Other
     I don't know of bond etfs hedged to your currency. You may look at local currency bond options. I can only suggest
     *choice
       #USD - It is the strongest currency available and safest to hedge to
-        *set bondname "AGGU"
+        *set bondname "AGGU iShares Core Global Aggregate Bond (USD Hedged)"
         *set bondter 10
         *goto review
       #I don't care - any mix of currencies works for me
@@ -40,7 +47,7 @@ What is the currency you spend most in?
   #I'm an international nomad and spend all over the world
     *label nomad
     In that case, your global bond portfolio does not need hedging to any currency. The ETF AGGG is an iShares fund that covers global bonds.
-    *set bondname "AGGG"
+    *set bondname "AGGG iShares Core Global Aggregate Bond (Unhedged)"
     *set bondter 10
     *goto review
   #I want more advanced bond index strategies

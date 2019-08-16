@@ -1,6 +1,6 @@
 *comment Copyright 2019 by Kevin Tam.
 
-This advisor recommends your equity allocation be passively allocated across the entire world, weighted by global market capitalization
+This boglebot recommends your equity allocation be passively allocated across the entire world, weighted by global market capitalization
 
 We'll then help you find the low cost ways of achieving this
 
@@ -89,25 +89,25 @@ But ultimately, it is up to you to choose which fund you want
       for help on which is best for you. Usually the accumulating version is preferred unless there is some tax consideration or you wish to spend the dividend income
       *choice
           #Accumulating - VWRA (TER 0.25%)
-            *set eqname1 "VWRA"
+            *set eqname1 "VWRA Vanguard FTSE All-World"
             *set eqval1 equities
             *set eqter 25
             *goto review
         #Distributing - VWRD (TER 0.25%)
-            *set eqname1 "VWRD"
+            *set eqname1 "VWRD Vanguard FTSE All-World"
             *set eqval1 equities
             *set eqter 25
             *goto review
   #A combination of IWDA and EIMI (TER 0.20%)
-    *set eqname1 "IWDA"
-    *set eqname2 "EIMI"
+    *set eqname1 "IWDA iShares Core MSCI World"
+    *set eqname2 "EIMI iShares Core MSCI EM IMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
     *set eqter 20
     *goto review
-  #A combination of SWDA and EIMI (TER 0.18%)
-    *set eqname1 "SWDA"
-    *set eqname2 "EIMI"
+  #A combination of SWRD and EIMI (TER 0.18%)
+    *set eqname1 "SWRD SPDR® MSCI World"
+    *set eqname2 "EIMI iShares Core MSCI EM IMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
     *set eqter 18

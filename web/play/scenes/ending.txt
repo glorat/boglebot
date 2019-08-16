@@ -1,6 +1,6 @@
 *comment Copyright 2019 by Kevin Tam.
 
-This is the end of the game!
+This is the end of the boglebot advisory service!
 
 Your chosen investment portfolio
 
@@ -10,6 +10,10 @@ Your chosen investment portfolio
   percent bonds ${bondname}
 
 What next?
+
+I believe my boglebot suggestions are good choices for the average investor and an excellent starting point. In particular, by choosing these simple low cost funds, you will save greatly on expenses compared to most other "professional" portfolios that get you on fees.
+
+However, they do not take into account all your personal circumstances so it is worth getting second opinions. Where can you get even more personalised help for free?
 
 Go to
 *link https://www.bogleheads.org/forum/viewforum.php?f=22 boglehead forum
