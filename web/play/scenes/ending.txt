@@ -11,13 +11,34 @@ Your chosen investment portfolio
 
 What next?
 
-I believe my boglebot suggestions are good choices for the average investor and an excellent starting point. In particular, by choosing these simple low cost funds, you will save greatly on expenses compared to most other "professional" portfolios that get you on fees.
+Boglebot suggestions are based on simple low cost funds with simple choices. Theyl save greatly on expenses compared to most other "professional" portfolios that get you on fees.
 
-However, they do not take into account all your personal circumstances so it is worth getting second opinions. Where can you get even more personalised help for free?
+However, they do not take into account all your personal circumstances so it is worth getting second opinions. Where can you get more personalised help for free?
 
 Go to
 *link https://www.bogleheads.org/forum/viewforum.php?f=22 boglehead forum
-create a thread, posting your investment needs and the boglebot suggestions
+create a thread, posting your investment needs and the boglebot suggestions. Copy the below text into a new topic and replace the italics with your own descriptions
+
+[b]Country of Residence:[/b] ${country}
+
+[b]International Lifestyle:[/b] [i]Indicate if you expect to move country before retiring or in retirement, or if you regularly change country either for work or for other reasons.[/i]
+
+[b]Currency:[/b] ${ccy}
+
+[b]Emergency funds:[/b] [i]Three to six months of expenses (indicate if you have this, but it is generally not part of your asset allocation).[/i]
+
+[b]Debt:[/b] [i]Indicate if you have any debt (credit card, school loans, car loans, mortgage) and the interest rate you are paying on each loan.[/i]
+
+[b]Desired Asset allocation:[/b] ${equities}% stocks / ${bonds}% bonds
+
+[b]Boglebot suggestions:[/b]
+
+${eqval1}% ${eqname1}
+*if eqval2>0
+    *line_break
+    ${eqval2}% ${eqname2} 
+*line_break
+${bonds}% ${bondname} 
 
 *choice
   #Return to start

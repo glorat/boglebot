@@ -1,0 +1,78 @@
+*comment Copyright 2019 by Kevin Tam.
+
+What is your primary currency for investing into your retirement?
+*choice
+    # USD (US Dollar)
+        *set ccy "USD"
+        *goto amount
+    # GBP (UK Pound Sterling)
+        *set ccy "GBP"
+        *goto amount
+    # EUR (European Euro)
+        *set ccy "EUR"
+        *goto amount
+    # CHF (Swiss Franc)
+        *set ccy "CHF"
+        *goto amount
+    # CAD (Canadian Dollar)
+        *set ccy "CAD"
+        *goto amount
+    # AUD (Australian Dollar)
+        *set ccy "AUD"
+        *goto amount
+    # Other
+        Enter your currency (3 letter code)
+        *input_text ccy
+        *goto amount
+
+*label amount
+How much money approximately will you invest?
+
+(This value is presently only used to illustrate some costs)
+
+*choice
+    # 1,000,000 ${ccy}
+        *set amount 1000000
+        *goto country
+    # 100,000 ${ccy}
+        *set amount 100000
+        *goto country
+    # 10,000 ${ccy}
+        *set amount 10000
+        *goto country
+    # Other
+        Enter the amount of ${ccy} you will invest
+        *input_number amount 0 1000000000
+        *goto country
+
+*label country
+What country do you pay your taxes to? This is typically your tax residency but if you are a US person then choose US.
+*choice
+  #Hong Kong/Singapore
+    Great! No capital gains or dividend taxes to worry about
+    *set country "Hong Kong/Singapore"
+    *finish
+  #Australia
+    There are many local specific concerns as well as specialist Australia funds provided by companies such as Vanguard. The boglebot does not yet have the expertise to advise on this special situation
+    
+    *set country "Australia"
+    *gosub_scene contributing
+    *goto country
+  #Japan
+      Due to favorable tax treaties with the US, you can invest in US domiciled ETFs just like a US person.
+      *set country "Japan"
+      *goto usperson
+  #United States
+      *set country "USA"
+      *label usperson
+    Unfortunately, helping US persons is beyond the boglebot! There are many guides on the internet for US investing. Go choose one of those These pages are aimed at non-US individuals
+    
+    *gosub_scene contributing
+    *goto country
+  #Other country
+    I don't have specific advice for other countries as yet. See
+    *link https://www.bogleheads.org/wiki/Nonresident_alien%27s_ETF_domicile_decision_table
+    for general advice. Since I don't know any better, I will assume you don't have a favourable tax treaty with the US on both dividend witholding taxes and estate taxes. Therefore, recommendations will be limited to Ireland domiciled ETFs that have favourable treatment. For investments under 60,000 USD, your country may have other reasonable options.
+    
+    *finish
+

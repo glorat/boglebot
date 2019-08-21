@@ -31,7 +31,7 @@ What is the currency you spend most in?
     *set bondter 10
     *goto review
   #EUR - Euro
-    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to EUR.
+    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to EUR. In most exchanges, AGGH is the ticker symbol but on Xetra, it is listed as EUNA
     *set bondname "AGGH iShares Core Global Aggregate Bond (EUR Hedged)"
     *set bondter 10
     *goto review
