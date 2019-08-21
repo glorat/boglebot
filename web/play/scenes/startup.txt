@@ -22,7 +22,13 @@
 
 Welcome to the unofficial Boglebot service!
 
-Your Boglebot financial advisor will help you to help you set an asset allocation for your investments and (in a future release) see how your portfolio performs.
+Your Boglebot financial advisor will help collect your thoughts on asset allocations and provide some options as to what you could consider for your retirement portfolio
+
+Privacy policy: This website (boglebot.com) does not store any of your data. There are no cookes, no adverts, no logs. All the choices you make stay in your browser and disappear when you close it.
+
+Disclaimer: No guarantees are made as to the accuracy of the information on this site or the appropriateness of any advice to your particular situation.
+
+*page_break
 
 How much money (in your currency) will you invest?
 *choice
