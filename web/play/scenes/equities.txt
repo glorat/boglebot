@@ -75,7 +75,7 @@ Based on the cheapest ETF in its class, run by a profit making company, also req
         
         *goto chooseglobal
     #Cheapest fund
-        The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.18%.
+        The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.13%.
         
         *goto chooseglobal
 
