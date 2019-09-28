@@ -26,7 +26,7 @@
 
 Welcome to the unofficial Boglebot service!
 
-Your Boglebot financial advisor will help collect your thoughts on asset allocations and provide some options as to what you could consider for your retirement portfolio
+Your Boglebot financial advisor will help collect your thoughts on asset allocations and implement an international flavour of the "two fund portfolio" composed of a diversified global equity portfolio and a diversified bond portfolio.
 
 Privacy policy: This website (boglebot.com) does not store any of your data. There are no cookes, no adverts, no logs. All the choices you make stay in your browser and disappear when you close it.
 

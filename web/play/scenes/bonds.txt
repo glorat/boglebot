@@ -31,10 +31,36 @@ What is the currency you spend most in?
     *set bondter 10
     *goto review
   #EUR - Euro
-    Euro it is! The ETF AGGH is an iShares fund that covers global bonds  and is hedged to EUR. In most exchanges, AGGH is the ticker symbol but on Xetra, it is listed as EUNA
-    *set bondname "AGGH iShares Core Global Aggregate Bond (EUR Hedged)"
-    *set bondter 10
-    *goto review
+    Euro it is! The Boglebot offers 3 choices for a global bond fund that is hedged back to EUR. Note that unlike the rest of the Boglebot recommended funds, the following choices are not found on the London Stock Exchange. You'll need access to local European exchanges.
+    
+    1) The ETF AGGH is an iShares fund that is the [b]largest[/b] global bonds  and is hedged to EUR. (Recommended due to popularity)
+    
+    2) The ETF VAGF is a relatively [b]new[/b] Vanguard ETF and is [b]accumulating[/b]
+    
+    3) The ETF VAGE is a relatively [b]new[/b] Vanguard ETF and is [b]distributing[/b]
+    
+    All above choices track the same Barclays global bond index and have the same 0.10% expense ratio is there isn't much to choose between them
+    
+    *choice
+      #AGGH - iShares Accumulating ETF
+        On the Borsa Italiana and SIX Swiss exchange, the ticker symbol is AGGH. On the popular German Xetra exchange, the symbol is [b]EUNA[/b]. They are all the same underlying fund, it just depends on your broker and exchange.
+       *set bondname "AGGH/EUNA iShares Core Global Aggregate Bond (EUR Hedged)"
+       *set bondter 10
+       *goto review
+     #VAGF - Vanguard Accumulating ETF
+        More information about your choice can be found at 
+        *link https://americas.vanguard.com/institutional/mvc/detail/etf/overview?portId=9443&assetCode=BOND Vanguard US overview
+        It is listed on the Deutsche Boerse exchange
+       *set bondname "VAGF Global Aggregate Bond UCITS ETF EUR Hedged Accumulating"
+       *set bondter 10
+       *goto review
+     #VAGE - Vanguard Distributing ETF
+        More information about your choice can be found at
+        *link https://americas.vanguard.com/institutional/mvc/detail/etf/overview?portId=9689&assetCode=BOND Vanguard US overview
+        It is listed on the Deutsche Boerse exchange
+       *set bondname "VAGE - Global Aggregate Bond UCITS ETF EUR Hedged Distributing"
+       *set bondter 10
+       *goto review
   #Other
     I don't know of bond etfs hedged to your currency. You may look at local currency bond options. I can only suggest
     *choice
