@@ -57,34 +57,40 @@ What type of ETF shall we go for?
         
 
 *label globalindex
-For equities, there are three recommended ways of buying the global market, depending on what you prefer
+For equities, there are these recommended ways of buying the global market, depending on what you prefer
 
-A single ETF fund that covers the global market, run by a company owned by ETF share owners, thus acting in your best interests
+A single ETF fund that covers the global market, run by a company owned by ETF share owners, thus acting in your best interests. Vanguard also offer a lower cost option if you can manage two ETFs
 
 Based on the largest most popular ETF in its class, run by a profit making company but requires you to manage two ETFs
 
 Based on the cheapest ETF in its class, run by a profit making company, also requiring you to manage two ETFs
 
+Choose an option to learn more or move on when you have read enough
+
 *choice
     #Single fund (recommended)
-        Then I recommend the Vanguard FTSE All World ETF. The fund has an expense ratio of 0.25%
+        Then I recommend the Vanguard FTSE All World ETF. The fund has an expense ratio of 0.25%, There are accumulating and distributing options.
         
-        *goto chooseglobal
+        *goto globalindex
     #Most popular fund
         The iShares Core MSCI World ETF (IWDA) is the most popular ETF in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.20%
         
-        *goto chooseglobal
+        *goto globalindex
+    #Cheapest Vanguard fund
+        Vanguard has arguably the best reputation in the market for having customer interests before profits due to its corporate structure. They consistent lower their expenses when they can. Only distributing funds are available. The funds will have a combined expense ratio of about 0.14%
+        *goto globalindex
     #Cheapest fund
         The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.13%.
-        
+        *goto globalindex
+    #Ready to choose
         *goto chooseglobal
 
 *label chooseglobal
 
-But ultimately, it is up to you to choose which fund you want
+It is time to choose your strategy
 
 *choice
-  #Vanguard All World - VWRD/VWRA (TER 0.25%)
+  #Vanguard single fund - VWRD/VWRA (TER 0.25%)
       There are accumulating and distributing versions of this ETF. See *link https://www.bogleheads.org/wiki/Comparison_of_accumulating_ETFs_and_distributing_ETFs
       for help on which is best for you. Usually the accumulating version is preferred unless there is some tax consideration or you wish to spend the dividend income
       *choice
@@ -98,19 +104,26 @@ But ultimately, it is up to you to choose which fund you want
             *set eqval1 equities
             *set eqter 25
             *goto review
-  #A combination of IWDA and EIMI (TER 0.20%)
+  #Vanguard cheap combo - VDEV and VDEM (TER 0.14%)
+    *set eqname1 "VDEV FTSE Developed World"
+    *set eqname2 "VDEM FTSE Emerging Markets UCITS ETF"
+    *set eqval1 round((88*equities)/100)
+    *set eqval2 round((12*equities)/100)
+    *set eqter 14
+    *goto review
+  #iShares popular combo - IWDA and EIMI (TER 0.20%)
     *set eqname1 "IWDA iShares Core MSCI World"
     *set eqname2 "EIMI iShares Core MSCI EM IMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
     *set eqter 20
     *goto review
-  #A combination of SWRD and EIMI (TER 0.18%)
+  #SPDR cheapest combo - SWRD and EIMI (TER 0.13%)
     *set eqname1 "SWRD SPDR® MSCI World"
     *set eqname2 "EIMI iShares Core MSCI EM IMI"
     *set eqval1 round((88*equities)/100)
     *set eqval2 round((12*equities)/100)
-    *set eqter 18
+    *set eqter 13
     *goto review
   #Give me more advice
       *goto globalindex
