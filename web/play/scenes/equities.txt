@@ -65,21 +65,23 @@ Based on the largest most popular ETF in its class, run by a profit making compa
 
 Based on the cheapest ETF in its class, run by a profit making company, also requiring you to manage two ETFs
 
-Choose an option to learn more or move on when you have read enough
+Choose an option to learn more or click "Ready to choose" when you have learned enough
 
 *choice
-    #Single fund (recommended)
+    #1) Single fund (recommended)
         Then I recommend the Vanguard FTSE All World ETF. The fund has an expense ratio of 0.22%, There are accumulating and distributing options.
         
+        Having a single equity fund maximizes simplicity and means you don't have to worry about balancing ratios or other time consuming activities. Time is money after all!
+        
         *goto globalindex
-    #Most popular fund
+    # 2)Most popular fund
         The iShares Core MSCI World ETF (IWDA) is the most popular ETF in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.20%
         
         *goto globalindex
-    #Cheapest Vanguard fund
+    # 3) Cheapest Vanguard fund
         Vanguard has arguably the best reputation in the market for having customer interests before profits due to its corporate structure. They consistent lower their expenses when they can. The funds will have a combined expense ratio of about 0.14%
         *goto globalindex
-    #Cheapest fund
+    # 4) Cheapest fund
         The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.13%.
         *goto globalindex
     #Ready to choose
