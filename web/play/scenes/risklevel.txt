@@ -25,7 +25,7 @@ to guide yourself to an answer
     *set equities 40
     *set bonds 60
     *goto wrapup
-  #Moderate - 20% equities
+  #Conservative - 20% equities
     *set equities 20
     *set bonds 80
     *goto wrapup
