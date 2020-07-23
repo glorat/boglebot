@@ -1,9 +1,13 @@
 *comment Copyright 2019 by Kevin Tam.
 
-The purpose of bonds in your portfolio is to (paste BH advice here)
+Bonds are typically used to stabilize the value of a portfolio and/or produce a stream of income. Longer-term bonds have higher correlation with equities; shorter-term bonds provide more diversification benefit but lower yield.
 
-This game will recommend global bonds hedged back to your local spending currency. This is based both on my opinion and that of Vanguard's: 
+*link https://www.bogleheads.org/wiki/Bond_basics#Role_in_a_portfolio
+
+This bot will recommend global bonds hedged back to your local spending currency. This is based both on my opinion and that of Vanguard's: 
 *link https://personal.vanguard.com/pdf/ISGGLBD.pdf
+
+Another sensible option is to use your local government bonds, assuming your government issues high credit quality bonds. (e.g. GBP, EUR, JPY)
 
 *if bonds = 0
   But since you don't need a bond allocation, we can skip this section
@@ -14,32 +18,57 @@ What is the currency you spend most in?
 
 *choice
   #USD - US Dollars
-    Dollars it is! The ETF AGGU is an iShares fund that covers global bonds and is hedged to USD.
-    *set bondname "AGGU iShares Core Global Aggregate Bond (USD Hedged)"
-    *set bondter 10
-    *goto review
+    Dollars it is! Recommendation is to use an ETF that tracks the Global Aggregate Bond Index, hedged to USD.
+    
+    Here are two sensible choices. The most popular and liquid option is from iShares. Vanguard has also launched a relatively new option for those that prefer Vanguard. Both options have a TER of 0.1%
+    
+    *choice
+        #iShares AGGU - Accumulating (most popular)
+            The ETF AGGU is an iShares fund that covers global bonds and is hedged to USD.
+            *set bondname "AGGU iShares Core Global Aggregate Bond (USD Hedged)"
+            *set bondter 10
+            *goto review
+        #Vanguard VAGU - Accumulating
+            The ETF VAGU is a Vanguard fund that covers global bonds and is hedged to USD.
+            *set bondname "VAGU Vanguard Global Aggregate Bond (USD Hedged)"
+            *set bondter 10
+            *goto review
   #GBP - UK Pounds Sterling
-    I offer you three choices.
+    Sterling it is! . Recommendation is to use an ETF that tracks the Global Aggregate Bond Index, hedged to GBP.
     
-    1) The ETF AGBP is 
+    Here are three sensible choices. The most popular and liquid option is from iShares. Vanguard has also launched a relatively new option for those that prefer Vanguard. All options have a TER of 0.1%
+    
+    1) The iShares AGBP
     *link http://www.morningstar.co.uk/uk/etf/snapshot/snapshot.aspx?id=0P0001C9YI iShares Global Aggregate Bond UCITS 
-    that covers global bonds  and is hedged to GBP.
+    from iShares is the most popular and is a Distributing fund
     
-    2) 
-    Sterling it is! 
-    *set bondname "AGBP - iShares Core Global Aggregate Bond (GBP Hedged)"
-    *set bondter 10
-    *goto review
+    2) The Vanguard VAGS ETF is an Accumulating fund
+    
+    3) The Vanguard VAGP ETF is a Distributing fund
+    
+    *choice
+        #iShares AGBP
+            *set bondname "AGBP - iShares Core Global Aggregate Bond (GBP Hedged)"
+            *set bondter 10
+            *goto review
+        #Vanguard VAGS - Accumulating
+            *set bondname "VAGS - Vanguard Global Aggregate Bond (GBP Hedged)"
+            *set bondter 10
+            *goto review
+        #Vanguard VAGP - Distributing
+            *set bondname "VAGP - Vanguard Global Aggregate Bond (GBP Hedged)"
+            *set bondter 10
+            *goto review
   #EUR - Euro
     Euro it is! The Boglebot offers 3 choices for a global bond fund that is hedged back to EUR. Note that unlike the rest of the Boglebot recommended funds, the following choices are not found on the London Stock Exchange. You'll need access to local European exchanges.
     
-    1) The ETF AGGH is an iShares fund that is the [b]largest[/b] global bonds  and is hedged to EUR. (Recommended due to popularity)
+    1) The ETF AGGH is an iShares fund that is the [b]largest[/b] global bond fund that is hedged to EUR. (Recommended due to popularity)
     
     2) The ETF VAGF is a relatively [b]new[/b] Vanguard ETF and is [b]accumulating[/b]
     
     3) The ETF VAGE is a relatively [b]new[/b] Vanguard ETF and is [b]distributing[/b]
     
-    All above choices track the same Barclays global bond index and have the same 0.10% expense ratio is there isn't much to choose between them
+    All above choices track the same Barclays global bond index and have the same 0.10% expense ratio so there isn't much to choose between them
     
     *choice
       #AGGH - iShares Accumulating ETF
@@ -112,7 +141,9 @@ Like 2) but only high grade bonds, thus excluding governments like Italy.
 
 [b]4) Local only government bonds[/b]
 
-Some efficient market theory says obtaining the risk free rate of interest won't matter if it is local or globally but hedged back. Thus if you can get purely local currency bonds at lower cost, you may save on expense fees
+Some efficient market theory says obtaining the risk free rate of interest won't matter if it is local or globally but hedged back. Thus if you can get purely local currency bonds at lower cost, you may save on expense fees.
+
+The above is for your eduction. The Boglebot doesn't presently allow you to choose them. (Sorry). To continue, the main recommendation here is AGGG.
 
 *choice
   #Global Aggregate Bond Index
