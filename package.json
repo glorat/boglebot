@@ -1,0 +1,24 @@
+{
+  "name": "@glorat/boglebot",
+  "version": "1.0.0",
+  "description": "Creating a 2 fund portfolio for international bogleheads",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glorat/boglebot.git"
+  },
+  "keywords": [
+    "boglehead"
+  ],
+  "author": "Kevin Tam",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/glorat/boglebot/issues"
+  },
+  "homepage": "https://github.com/glorat/boglebot#readme"
+}
