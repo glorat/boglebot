@@ -996,7 +996,7 @@ function printOptionRadioButton(div, name, option, localChoiceNumber, globalChoi
       }
     }
     printx(line, label);
-    
+
     div2.appendChild(label);
     div.appendChild(div2);
 }
@@ -1913,7 +1913,7 @@ function purchase(product, callback) {
       if (!href) return webStoreFallback();
       window.location.href = href;
     };
-    
+
     // instead of IAP, send the user to a store
     if (/(iPhone OS|iPad)/.test(navigator.userAgent)) {
       if (/iPhone OS [456]_/.test(navigator.userAgent)) {
@@ -3164,43 +3164,6 @@ window.onload=function() {
 
     submitAnyDirtySaves();
 
-    if (window.purchaseSubscriptions) {
-      var productList = "";
-      for (var key in purchaseSubscriptions) {
-        productList += (productList ? " " : "") + key;
-      }
-      if (productList) checkPurchase(productList, function() {});
-    }
-    if (window.isWeb) {
-      (function() {
-        if (window.releaseDate && new Date() < window.releaseDate) {
-          var appLinks = document.getElementById('mobileLinks');
-          if (appLinks) appLinks.style.display = 'none';
-        }
-        var productMap = {};
-        if (typeof purchases === "object") {
-          for (var scene in purchases) {
-            productMap[purchases[scene]] = 1;
-          }
-        }
-        if (!window.knownProducts) window.knownProducts = [];
-        for (var product in productMap) {
-          window.knownProducts.push(product);
-        }
-
-        var fullProducts = [];
-        for (var i = 0; i < window.knownProducts.length; i++) {
-          fullProducts[i] = window.storeName + "." + window.knownProducts[i];
-        }
-        xhrAuthRequest("GET", "product-data", function(ok, data) {
-          if (!window.productData) window.productData = {};
-          for (var i = 0; i < window.knownProducts.length; i++) {
-            window.productData[window.knownProducts[i]] = data[window.storeName + "." + window.knownProducts[i]];
-          }
-        }, "products", fullProducts.join(","));
-      })();
-    }
-
 };
 
 if ( document.addEventListener ) {
@@ -3237,7 +3200,7 @@ if (window.isWeb) {
     window.fbAsyncInit = function() {
       FB.init({
         appId      : facebookAppId,
-        cookie     : true,  // enable cookies to allow the server to access 
+        cookie     : true,  // enable cookies to allow the server to access
                             // the session
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.0' // use version 2.0
@@ -3258,7 +3221,7 @@ if (window.isWeb) {
     po.src = 'https://apis.google.com/js/client:plusone.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
-  
+
 } else if (window.isIosApp) {
   document.getElementById("dynamic").innerHTML =
   "#header { display: none; }"+
