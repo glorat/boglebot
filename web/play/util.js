@@ -1,16 +1,16 @@
 /*
  * Copyright 2010 by Dan Fabulich.
- * 
+ *
  * Dan Fabulich licenses this file to you under the
  * ChoiceScript License, Version 1.0 (the "License"); you may
- * not use this file except in compliance with the License. 
+ * not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *  http://www.choiceofgames.com/LICENSE-1.0.txt
- * 
+ *
  * See the License for the specific language governing
  * permissions and limitations under the License.
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
@@ -263,37 +263,6 @@ function xhrAuthRequest(method, endpoint, callback) {
   xhr.send(params);
 }
 
-function login(email, password, register, subscribe, callback) {
-  xhrAuthRequest("POST", "login", callback, "email", encodeURIComponent(email), "password", encodeURIComponent(password), "register", register, "subscribe", subscribe);
-}
-
-function forgotPassword(email, callback) {
-  xhrAuthRequest("POST", "forgot", callback, "email", encodeURIComponent(email));
-}
-
-function logout(callback) {
-  document.cookie = 'login=0;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  xhrAuthRequest("GET", "logout", callback);
-  recordLogin(false);
-  window.knownPurchases = null;
-  window.registered = false;
-  if (typeof FB != "undefined" && FB.logout) FB.logout();
-  if (typeof gapi != "undefined" && gapi.auth && gapi.auth.signOut) gapi.auth.signOut();
-}
-
-function recordLogin(registered, loginId, email, callback) {
-  if (initStore()) {
-    if (registered) recordEmail(email);
-    window.store.set("login", loginId || 0, function() {safeCall(null, callback);});
-    window.registered = registered;
-  } else {
-    safeTimeout(callback, 0);
-  }
-}
-
-function getRemoteEmail(callback) {
-  xhrAuthRequest("GET", "getuser", callback);
-}
 
 function saveCookie(callback, slot, stats, temps, lineNum, indent) {
     var value = computeCookie(stats, temps, lineNum, indent);
@@ -419,226 +388,23 @@ function getDirtySaveList(callback) {
   });
 }
 
-function remoteSaveMerger(i, callback) {
-  var remoteStore = new Persist.Store(window.remoteStoreNames[i]);
-  restoreObject(remoteStore, "save_list", [], function (remoteSlotList) {
-    fetchSavesFromSlotList(remoteStore, remoteSlotList, 0, [], function(remoteSaveList) {
-      mergeRemoteSaves(remoteSaveList, 0/*recordDirty*/, function() {
-        i++;
-        if (i < window.remoteStoreNames.length) {
-          remoteSaveMerger(i, callback);
-        } else {
-          callback.apply(null, arguments);
-        }
-      });
-    });
-  });
-}
-
-function getSaves(callback) {
-  if (window.remoteStoreNames && window.remoteStoreNames.length) {
-    remoteSaveMerger(0, callback);
-  } else if (window.remoteStoreName && window.storeName != window.remoteStoreName) {
-    var remoteStore = new Persist.Store(window.remoteStoreName);
-    restoreObject(remoteStore, "save_list", [], function (remoteSlotList) {
-      fetchSavesFromSlotList(remoteStore, remoteSlotList, 0, [], function(remoteSaveList) {
-        mergeRemoteSaves(remoteSaveList, 0/*recordDirty*/, callback);
-      });
-    });
-  } else {
-    restoreObject(initStore(), "save_list", [], function (localSlotList) {
-      fetchSavesFromSlotList(initStore(), localSlotList, 0, [], callback);
-    });
-  }
-}
-
-function fetchSavesFromSlotList(store, slotList, i, saveList, callback) {
-  if (i >= slotList.length) {
-    return safeCall(null, function() {callback(saveList);});
-  }
-  restoreObject(store, "state"+slotList[i], null, function(saveState) {
-    if (saveState) {
-      saveState.timestamp = slotList[i].substring(4/*"save".length*/);
-      saveList.push(saveState);
-    }
-    fetchSavesFromSlotList(store, slotList, i+1, saveList, callback);
-  });
-}
-
 function isWebSavePossible() {
-  if (!initStore()) return false;
-  if (/^http/.test(window.location.protocol)) {
-    return document.domain == window.webSaveDomain || document.domain == "localhost";
-  }
-  // if it's a file URL with a valid store, either you're a 3rd party developer
-  // who knows what you're doing, or you're a mobile app
-  return true;
+  return false;
 }
-
-
-webSaveDomain = "www.choiceofgames.com";
-webSaveUrl = "https://" + webSaveDomain + "/ajax_proxy.php/websave";
 
 function submitRemoteSave(slot, email, subscribe, callback) {
-  if (!isWebSavePossible()) return safeTimeout(function() { callback(false); });
-  window.store.get("state"+slot, function(ok, value) {
-    if (ok) {
-      var timestamp = slot.substring(4/*"save".length*/);
-      var xhr = findXhr();
-      var gameName = window.remoteStoreName || window.storeName;
-      var params = "email="+email+"&game="+gameName+"&realGame="+window.storeName+"&json="+encodeURIComponent(value)+"&timestamp="+ timestamp+"&subscribe="+subscribe;
-      xhr.open("POST", webSaveUrl,true);
-      xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-      var done = false;
+  return safeTimeout(function() { callback(false); });
 
-      xhr.onreadystatechange = function() {
-        if (done) return;
-        if (xhr.readyState != 4) return;
-        done = true;
-        var ok = xhr.status == 200;
-        if (ok) {
-          safeCall(null, function() {callback(true);});
-        } else {
-          recordDirtySlots([slot], function() {
-            safeCall(null, function() {callback(false);});
-          });
-        }
-      };
-      xhr.send(params);
-    } else {
-      recordDirtySlots([slot], function() {
-        asyncAlert("There was a problem uploading the saved game. This is probably a bug; please contact support@choiceofgames.com with code 17891.", function() {
-          safeCall(null, function() {callback(false);});
-        });
-      });
-    }
-  });
-}
-
-function submitDirtySaves(dirtySaveList, email, callback) {
-  function submitDirtySave(i) {
-    if (dirtySaveList[i]) {
-      submitRemoteSave(dirtySaveList[i], email, false, function(ok) {
-        if (ok) {
-          submitDirtySave(i+1);
-        } else {
-          safeCall(null, function() {callback(false);});
-        }
-      });
-    } else {
-      window.store.remove("dirty_save_list", function() {
-        safeCall(null, function() {callback(true);});
-      });
-    }
-  }
-  submitDirtySave(0);
 }
 
 function submitAnyDirtySaves(callback) {
   if (!callback) callback = function(ok) {};
-  try {
-    getDirtySaveList(function(dirtySaveList) {
-      if (dirtySaveList && dirtySaveList.length) {
-        try {
-          fetchEmail(function(email) {
-            if (email) {
-              submitDirtySaves(dirtySaveList, email, callback);
-            } else {
-              callback(false);
-            }
-          });
-        } catch (e) {
-          callback(false);
-        }
-      }
-    });
-  } catch (e) {
-    callback(false);
-  }
+  callback(false);
 }
 
 function getRemoteSaves(email, callback) {
-  if (!isWebSavePossible()) {
     safeTimeout(function() {callback([]);}, 0);
     return;
-  }
-  var xhr = findXhr();
-  var gameName = window.remoteStoreName || window.storeName;
-  xhr.open("GET", webSaveUrl + "?email="+email+"&game="+gameName, true);
-  var done = false;
-  xhr.onreadystatechange = function() {
-    if (done) return;
-    if (xhr.readyState != 4) return;
-    done = true;
-    if (xhr.status != 200) {
-      if (window.console) console.log("Couldn't load remote saves. " + xhr.status + ": " + xhr.responseText);
-      safeCall(null, function() {callback(null);});
-    } else {
-      var result = xhr.responseText;
-      result = jsonParse(result);
-      var remoteSaveList = [];
-      for (var i = 0; i < result.length; i++) {
-        var save = result[i].json;
-        save.timestamp = result[i].timestamp;
-        remoteSaveList.push(save);
-      }
-      safeCall(null, function() {callback(remoteSaveList);});
-    }
-  };
-  xhr.send();
-}
-
-function mergeRemoteSaves(remoteSaveList, recordDirty, callback) {
-  if (!isWebSavePossible()) {
-    safeTimeout(function() { callback([], 0, []); }, 0);
-    return;
-  }
-  restoreObject(initStore(), "save_list", [], function (localSlotList) {
-    fetchSavesFromSlotList(initStore(), localSlotList, 0, [], function(localSaveList) {
-      var localSlotMap = {};
-      for (var i = 0; i < localSlotList.length; i++) {
-        localSlotMap[localSlotList[i]] = 1;
-      }
-      var remoteSlotMap = {};
-      for (i = 0; i < remoteSaveList.length; i++) {
-        remoteSlotMap["save"+remoteSaveList[i].timestamp] = 1;
-      }
-      var newRemoteSaves = 0;
-      for (i = 0; i < remoteSaveList.length; i++) {
-        var remoteSave = remoteSaveList[i];
-        var slot = "save"+remoteSave.timestamp;
-        if (!localSlotMap[slot]) {
-          saveCookie(null, slot, remoteSave.stats, remoteSave.temps, remoteSave.lineNum, remoteSave.indent);
-          localSlotList.push(slot);
-          localSaveList.push(remoteSave);
-          newRemoteSaves++;
-        }
-      }
-
-      var dirtySaveList = [];
-      for (i = 0; i < localSlotList.length; i++) {
-        if (!remoteSlotMap[localSlotList[i]]) {
-          dirtySaveList.push(localSlotList[i]);
-        }
-      }
-
-      if (recordDirty) {
-        window.store.set("dirty_save_list", toJson(dirtySaveList), finale);
-      } else {
-        finale();
-      }
-
-      function finale() {
-        if (newRemoteSaves) {
-          window.store.set("save_list", toJson(localSlotList), function() {
-            safeCall(null, function() { callback(localSaveList, newRemoteSaves, dirtySaveList); });
-          });
-        } else {
-          safeCall(null, function() {callback(localSaveList, newRemoteSaves, dirtySaveList);});
-        }
-      }
-    });
-  });
 }
 
 function delayBreakStart(callback) {
@@ -732,7 +498,6 @@ function restartGame(shouldPrompt) {
   function actuallyRestart(result) {
     if (!result) return;
     delayBreakEnd();
-    submitAnyDirtySaves();
     clearCookie(function() {}, 'temp');
     clearCookie(function() {
       window.nav.resetStats(window.stats);
@@ -887,8 +652,8 @@ function findXhr() {
     /* Number */
     function crc32( /* String */ str, /* Number */ crc ) {
         if( !crc ) crc = 0;
-        var n = 0; //a number between 0 and 255 
-        var x = 0; //an hex number 
+        var n = 0; //a number between 0 and 255
+        var x = 0; //an hex number
 
         crc = crc ^ (-1);
         for( var i = 0, iTop = str.length; i < iTop; i++ ) {
@@ -1042,71 +807,7 @@ function updateSinglePaidSceneCache(sceneName, callback) {
   }
 }
 
-function updateAllPaidSceneCaches() {
-  if (!isStoreSceneCacheRequired()) return;
-  var flipped = {};
-  for (var scene in purchases) {
-    if (/^fake:/.test(scene)) continue;
-    scene = scene.replace(/ /g, "_");
-    if (!flipped[purchases[scene]]) flipped[purchases[scene]] = [];
-    flipped[purchases[scene]].push(scene);
-  }
-  var products = [];
-  for (var product in flipped) {
-    products.push(product);
-  }
-  if (!products.length) return;
-  checkPurchase(products.join(" "), function(ok, result) {
-    if (!ok || !result) return;
-    var sceneList = [];
-    var push = Array.prototype.push;
-    for (var product in flipped) {
-      if (result[product]) {
-        push.apply(sceneList, flipped[product]);
-      }
-    }
-    if (!sceneList.length) return;
-    for (var i = 0; i < sceneList.length; i++) {
-      (function(i) {
-        var scene = sceneList[i];
-        var fileName = scene + ".txt.json";
-        window.store.get("cache_scene_hash_"+scene, function(ok, result) {
-          if (!ok || result !== hashes.scenes[fileName]) {
-            updateSinglePaidSceneCache(scene, function() {});
-          }
-        });
-      })(i);
-    }
-  })
-}
 
-function checkForAppUpdates() {
-  if (navigator.serviceWorker) {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      if (reg) reg.update();
-    });
-  } else {
-    if (_global.applicationCache && applicationCache.status) {
-      applicationCache.update();
-    }
-  }
-}
-
-function refreshIfAppUpdateReady() {
-  if (navigator.serviceWorker) {
-    if (window.controllerchanged) {
-      return window.location.reload();
-    }
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      if (reg.waiting) {
-        reg.waiting.postMessage('skipWaiting');
-        return window.location.reload();
-      }
-    });
-  } else if (_global.applicationCache && applicationCache.status == 4) {
-    window.location.reload();
-  }
-}
 
 function awaitAppUpdate(callback) {
 

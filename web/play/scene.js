@@ -105,7 +105,7 @@ Scene.prototype.printLoop = function printLoop() {
             this.dedent(indent);
         }
         // Ability to end a choice #option without goto is guarded by implicit_control_flow variable
-        if (this.temps._choiceEnds[this.lineNum] && 
+        if (this.temps._choiceEnds[this.lineNum] &&
                 (this.stats["implicit_control_flow"] || this.temps._fakeChoiceDepth > 0)) {
             // Skip to the end of the choice if we hit the end of an #option
             this.rollbackLineCoverage();
@@ -315,47 +315,6 @@ Scene.prototype.loadSceneFast = function loadSceneFast(url) {
         }
       }
       return awaitAllScenes();
-    } else if (window.purchases[self.name] && isStoreSceneCacheRequired()) {
-      var sceneName = this.name.replace(/ /g, "_");
-      return window.store.get("cache_scene_hash_"+sceneName, function(ok, hash) {
-        function keepScene(result) {
-          if (!window.cachedResults) window.cachedResults = {};
-          cachedResults[self.name] = result;
-          self.loadLinesFast(result.crc, result.lines, result.labels);
-        }
-        function loadPaidScene() {
-          startLoading();
-          updateSinglePaidSceneCache(self.name, function(err, result) {
-            doneLoading();
-            if (err) {
-              main.innerHTML = "<div id='text'><p>Our apologies; there was a " + err + " error while loading game data."+
-              "  Please refresh now; if that doesn't work, please click the Restart button and email "+getSupportEmail()+" with details.</p>"+
-              " <p><button class='next' onclick='window.location.reload();'>Refresh Now</button></p></div>";
-              curl();
-            } else {
-              keepScene(result);
-            }
-          })
-        }
-        if (ok && hash == hashes.scenes[sceneName + ".txt.json"]) {
-          window.store.get("cache_scene_"+sceneName, function(ok, text) {
-            if (ok && text) {
-              var parsed;
-              try {
-                parsed = jsonParse(text);
-              } catch (e) {
-                if (window.console) console.error(e, e.stack);
-              }
-              if (parsed) return keepScene(parsed);
-              loadPaidScene();
-            } else {
-              loadPaidScene();
-            }
-          })
-        } else {
-          loadPaidScene();
-        }
-      });
     }
     startLoading();
     if (!url) {
@@ -376,18 +335,7 @@ Scene.prototype.loadSceneFast = function loadSceneFast(url) {
           try {
             var err = JSON.parse(xhr.responseText);
             if (err.error == "not registered") {
-              return isRegistered(function(registered) {
-                if (registered) {
-                  logout();
-                  loginDiv();
-                }
-                return clearScreen(function() {
-                  loginForm(main, 0/*optional*/,
-                    "Please sign in to access this part of the game.", function() {
-                      clearScreen(loadAndRestoreGame);
-                    });
-                });
-              });
+
             }
           } catch (e) {} // JSON parse failure? must not be a login prompt
         }
@@ -409,7 +357,7 @@ Scene.prototype.loadSceneFast = function loadSceneFast(url) {
         } else if (xhr.responseText === "") {
           throw new Error("Couldn't load " + url + "\nThe file is probably missing or empty.");
         }
-        
+
         if (!window.cachedResults) window.cachedResults = {};
         cachedResults[self.name] = result;
         self.loadLinesFast(result.crc, result.lines, result.labels);
@@ -468,18 +416,7 @@ Scene.prototype.loadScene = function loadScene() {
           try {
             var err = JSON.parse(xhr.responseText);
             if (err.error == "not registered") {
-              return isRegistered(function(registered) {
-                if (registered) {
-                  logout();
-                  loginDiv();
-                }
-                return clearScreen(function() {
-                  loginForm(main, 0/*optional*/,
-                    "Please sign in to access this part of the game.", function() {
-                      clearScreen(loadAndRestoreGame);
-                    });
-                });
-              });
+
             }
           } catch (e) {} // JSON parse failure? must not be a login prompt
         }
@@ -952,14 +889,14 @@ Scene.prototype.save = function save(slot) {
         }
         tempStatWrites = {};
       }
-      
+
       saveCookie(function() {}, slot, this.stats, this.temps, this.lineNum, this.indent, this.debugMode, this.nav);
     }
 };
 
 // *goto labelName
 // Go to the line labeled with the label command *label labelName
-// 
+//
 // goto by reference
 //   *create foo "labelName"
 //   *goto {foo}
@@ -1066,7 +1003,7 @@ Scene.prototype["return"] = function scene_return() {
     } else {
       throw new Error(this.lineMsg() + "invalid return; we've already returned from the last gosub");
     }
-    
+
 };
 
 // *gotoref expression
@@ -1343,7 +1280,7 @@ Scene.prototype.purchase = function purchase_button(data) {
           }
         );
       }
-      
+
       self.skipFooter = false;
       self.finished = false;
       self.execute();
@@ -1600,7 +1537,7 @@ Scene.prototype.parseOptions = function parseOptions(startIndent, choicesRemaini
             if (choicesRemaining.length>1 && !suboptionsEncountered) {
                 throw new Error(this.lineMsg() + "invalid indent, there were subchoices remaining: [" + choicesRemaining.join(",") + "]");
             }
-            if (bodyExpected && 
+            if (bodyExpected &&
                     (this.temps._fakeChoiceDepth === undefined || this.temps._fakeChoiceDepth < 1)) {
                 throw new Error(this.lineMsg() + "Expected choice body");
             }
@@ -1771,7 +1708,7 @@ Scene.prototype.parseOptions = function parseOptions(startIndent, choicesRemaini
         }
         if (!unselectable) atLeastOneSelectableOption = true;
     }
-    if (bodyExpected && 
+    if (bodyExpected &&
             (this.temps._fakeChoiceDepth === undefined || this.temps._fakeChoiceDepth < 1)) {
         throw new Error(this.lineMsg() + "Expected choice body");
     }
@@ -2354,16 +2291,6 @@ Scene.prototype.ending = function ending() {
       self.renderOptions([""], options, function(option) {
         if (option.restart) {
           return restartGame();
-        } else if (option.moreGames) {
-          self.more_games("now");
-          if (typeof curl != "undefined") curl();
-        } else if (option.share) {
-          clearScreen(function() {
-            self.share_this_game("now");
-            endingMenu();
-          });
-        } else if (option.subscribe) {
-          subscribeLink();
         }
       });
     }
@@ -2409,158 +2336,7 @@ Scene.prototype.subscribe = function scene_subscribe(data) {
   this.prevLine = "block";
   this.finished = true;
   this.skipFooter = true;
-  var self = this;
-  subscribe(this.target, options, function(now) {
-    self.finished = false;
-    // if "now" actually worked, then continue the scene
-    // otherwise, reset the page before continuing
-    if (now) {
-      self.skipFooter = false;
-      self.execute();
-    } else {
-      self.resetPage();
-    }
-  });
-};
 
-Scene.prototype.restore_game = function restore_game(data) {
-  var cancelLabel;
-  if (data) {
-    var result = /^cancel=(\S+)$/.exec(data);
-    if (!result) throw new Error(this.lineMsg() + "invalid restore_game line: " + data);
-    cancelLabel = result[1];
-  }
-  this.finished = true;
-  this.skipFooter = true;
-  var self = this;
-  var unrestorableScenes = this.parseRestoreGame(false/*alreadyFinished*/);
-  function renderRestoreMenu(saveList, dirtySaveList) {
-    self.paragraph();
-    var options = [];
-    for (var i = 0; i < saveList.length; i++) {
-      var save = saveList[i];
-      var date = new Date(save.timestamp*1);
-      if (!save) continue;
-      var name = "";
-      if (save.temps && save.temps.choice_restore_name) name = save.temps.choice_restore_name;
-      options.push({name:name + " ("+simpleDateTimeFormat(date)+")", group:"choice", state:save});
-    }
-    if (false) options.push({name:"Restore using a password.", group:"choice", password:true});
-    options.push({name:"Retrieve saved games online from choiceofgames.com.", group:"choice", fetch:true});
-    if (dirtySaveList.length) options.push({name:"Upload saved games to choiceofgames.com.", group:"choice", upload:true});
-    options.push({name:"Cancel.", group:"choice", cancel:true});
-    var groups = [""];
-    self.renderOptions(groups, options, function(option) {
-      if (option.upload) {
-        clearScreen(function() {
-          fetchEmail(function(defaultEmail){
-            self.printLine("Please type your email address to identify yourself.");
-            self.paragraph();
-            promptEmailAddress(this.target, defaultEmail, "allowContinue", function(cancel, email) {
-              if (cancel) {
-                self.finished = false;
-                if (typeof cancelLabel !== "undefined") {
-                  self["goto"](cancelLabel);
-                }
-                self.resetPage();
-                return;
-              }
-              clearScreen(function() {
-                startLoading();
-                submitDirtySaves(dirtySaveList, email, function(ok) {
-                  doneLoading();
-                  self.prevLine = "text"; // Put some space between the message and the option list
-                  if (!ok) {
-                    self.printLine("Error uploading saves. Please try again later.");
-                    renderRestoreMenu(saveList, dirtySaveList);
-                  } else {
-                    var count = dirtySaveList.length + (dirtySaveList.length == 1 ? " save" : " saves");
-                    self.printLine("Uploaded " + count + ".");
-                    renderRestoreMenu(saveList, []);
-                  }
-                });
-              });
-            });
-          });
-        });
-      } else if (option.fetch) {
-        clearScreen(function() {
-          fetchEmail(function(defaultEmail){
-            self.printLine("Please type your email address to identify yourself.");
-            self.paragraph();
-            promptEmailAddress(this.target, defaultEmail, "allowContinue", function(cancel, email) {
-              if (cancel) {
-                self.finished = false;
-                if (typeof cancelLabel !== "undefined") {
-                  self["goto"](cancelLabel);
-                }
-                self.resetPage();
-                return;
-              }
-              clearScreen(function() {
-                startLoading();
-                getRemoteSaves(email, function (remoteSaveList) {
-                  doneLoading();
-                  self.prevLine = "text";
-                  if (!remoteSaveList) {
-                    self.printLine("Error downloading saves. Please try again later.");
-                    renderRestoreMenu(saveList, dirtySaveList);
-                  } else {
-                    mergeRemoteSaves(remoteSaveList, "recordDirty", function(saveList, newRemoteSaves, dirtySaveList) {
-                      if (!remoteSaveList.length) {
-                        self.printLine("No saves downloaded for email address \""+email+"\". (Is that the correct email address?) If you're having trouble, please contact support at "+getSupportEmail()+".");
-                        renderRestoreMenu(saveList, dirtySaveList);
-                      } else {
-                        var downloadCount = remoteSaveList.length + " saved " + (remoteSaveList.length == 1 ? "game" : "games");
-                        var newCount = newRemoteSaves + " new saved " + (newRemoteSaves == 1 ? "game" : "games");
-                        self.printLine("Synchronized " + downloadCount + ". Downloaded " + newCount + ".");
-                        renderRestoreMenu(saveList, dirtySaveList);
-                      }
-                    });
-                  }
-                });
-              });
-            });
-          });
-        });
-      } else if (option.password) {
-        clearScreen(function() {
-          self.restore_password();
-        });
-      } else {
-        if (option.cancel) {
-          self.finished = false;
-          if (typeof cancelLabel !== "undefined") {
-            self["goto"](cancelLabel);
-          }
-          self.resetPage();
-        } else {
-          var state = option.state;
-          var sceneName = null;
-          if (state.stats && state.stats.sceneName) sceneName = (""+state.stats.sceneName).toLowerCase();
-          var unrestorable = unrestorableScenes[sceneName];
-
-          if (unrestorable) {
-            asyncAlert(unrestorable);
-            self.finished = false;
-            self.resetPage();
-            return;
-          }
-
-          saveCookie(function() {
-            clearScreen(function() {
-              restoreGame(state, null, /*userRestored*/true);
-            });
-          }, "", state.stats, state.temps, state.lineNum, state.indent, this.debugMode, this.nav);
-        }
-      }
-    });
-  }
-  getDirtySaveList(function(dirtySaveList) {
-    getSaves(function(saveList) {
-      renderRestoreMenu(saveList, dirtySaveList);
-    });
-  });
 };
 
 Scene.prototype.restore_password = function restore_password() {
@@ -2670,192 +2446,18 @@ Scene.prototype.parseRestoreGame = function parseRestoreGame(alreadyFinished) {
 };
 
 Scene.prototype.check_registration = function scene_checkRegistration() {
-  if (typeof window == "undefined" || typeof isRegistered == "undefined") return;
-  this.finished = true;
-  this.skipFooter = true;
-  var self = this;
-  isRegistered(function() {
-    self.finished = false;
-    self.skipFooter = false;
-    self.execute();
-  });
+    return;
 };
 
 Scene.prototype.login = function scene_login(optional) {
-  if (typeof window == "undefined" || typeof loginForm == "undefined") return;
-  optional = trim(optional);
-  if (optional) {
-    if (optional != "optional") throw new Error(this.lineMsg() + "invalid *login option: " + optional);
-    optional = 1;
-  }
-  var self = this;
-  this.finished = true;
-  this.skipFooter = true;
-  this.paragraph();
-  var target = this.target;
-  if (!target) target = document.getElementById('text');
-  loginForm(target, optional, null, function() {
-    clearScreen(function() {
-      self.finished = false;
-      self.prevLine = "empty";
-      self.screenEmpty = true;
-      self.execute();
-    });
-  });
+    return;
 };
 
 Scene.prototype.save_game = function save_game(destinationSceneName) {
-  if (!destinationSceneName) throw new Error(this.lineMsg()+"*save_game requires a destination file name, e.g. *save_game Episode2");
-  if (this.temps.choice_user_restored) return;
-  var self = this;
-  this.finished = true;
-  this.skipFooter = true;
-  fetchEmail(function(defaultEmail){
-    self.paragraph();
-    var form = document.createElement("form");
-    setClass(form, "saveGame");
-
-    form.action="#";
-
-    var message = document.createElement("div");
-    message.style.color = "red";
-    message.style.fontWeight = "bold";
-    form.appendChild(message);
-
-    var saveName = document.createElement("input");
-    saveName.type="text";
-    saveName.name="saveName";
-    saveName.setAttribute("placeholder", "Type a name for your saved game");
-    saveName.setAttribute("style", "display:block; font-size: 25px; width: 90%; margin: 1rem 0");
-    form.appendChild(saveName);
-
-    var hideEmailForm = false;
-    // hideEmailForm = _global.automaticCloudStorage;
-    if (!hideEmailForm) {
-      println("Please login to the choiceofgames.com save system with your email address below.", form);
-
-      var emailInput = document.createElement("input");
-      // This can fail on IE
-      try { emailInput.type="email"; } catch (e) {}
-      emailInput.name="email";
-      emailInput.value=defaultEmail;
-      emailInput.setAttribute("placeholder", "you@example.com");
-      emailInput.setAttribute("style", "display:block; font-size: 25px; width: 90%; margin: 1rem 0");
-      form.appendChild(emailInput);
-
-      var subscribeLabel = document.createElement("label");
-      subscribeLabel.setAttribute("for", "subscribeBox");
-      var subscribeBox = document.createElement("input");
-      subscribeBox.type = "checkbox";
-      subscribeBox.name = "subscribe";
-      subscribeBox.setAttribute("id", "subscribeBox");
-      subscribeBox.setAttribute("checked", true);
-      subscribeLabel.appendChild(subscribeBox);
-      subscribeLabel.appendChild(document.createTextNode("Email me when new games are available."));
-      form.appendChild(subscribeLabel);
-    }
-
-    var target = this.target;
-    if (!target) target = document.getElementById('text');
-    target.appendChild(form);
-    printButton("Next", form, true);
-
-    printButton("Cancel", target, false, function() {
-      clearScreen(function() {
-        self.finished = false;
-        self.prevLine = "empty";
-        self.screenEmpty = true;
-        self.execute();
-      });
-    });
-
-    form.onsubmit = function(e) {
-      preventDefault(e);
-      safeCall(this, function() {
-        var messageText;
-        if (!trim(saveName.value)) {
-          messageText = document.createTextNode("Please type a name for your saved game.");
-          message.innerHTML = "";
-          message.appendChild(messageText);
-          return;
-        }
-
-        var slot = "save" + new Date().getTime();
-        // create a clone stats object whose scene name is the destination scene
-        var saveStats = {};
-        for (var stat in self.stats) {
-          if ("scene" == stat) continue;
-          saveStats[stat] = self.stats[stat];
-        }
-        saveStats.scene = {name:destinationSceneName};
-
-        if (hideEmailForm) {
-          clearScreen(function() {
-            saveCookie(function() {
-              recordSave(slot, function() {
-                self.finished = false;
-                self.prevLine = "empty";
-                self.screenEmpty = true;
-                self.execute();
-              });
-            }, slot, saveStats, {choice_reuse:"allow", choice_user_restored:true, choice_restore_name:saveName.value}, 0, 0, false, self.nav);
-          });
-          return;
-        }
-
-        var shouldSubscribe = subscribeBox.checked;
-        var email = trim(emailInput.value);
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-          messageText = document.createTextNode("Sorry, \""+email+"\" is not an email address.  Please type your email address again.");
-          message.innerHTML = "";
-          message.appendChild(messageText);
-          return;
-        }
-        
-        recordEmail(email, function() {
-          clearScreen(function() {
-            saveCookie(function() {
-              recordSave(slot, function() {
-                startLoading();
-                submitRemoteSave(slot, email, shouldSubscribe, function(ok) {
-                  doneLoading();
-                  if (!ok) {
-                    asyncAlert("Couldn't upload your saved game to choiceofgames.com. You can try again later from the Restore menu.", function() {
-                      self.finished = false;
-                      self.prevLine = "empty";
-                      self.screenEmpty = true;
-                      self.execute();
-                    });
-                  } else {
-                    self.finished = false;
-                    self.prevLine = "empty";
-                    self.screenEmpty = true;
-                    self.execute();
-                  }
-                });
-              });
-            }, slot, saveStats, {choice_reuse:"allow", choice_user_restored:true, choice_restore_name:saveName.value}, 0, 0, false, self.nav);
-          });
-        });
-      });
-    };
-
-    printFooter();
-  });
 };
 
 Scene.prototype.show_password = function show_password() {
-  if (this.temps.choice_user_restored) return;
-  this.paragraph();
-  if (typeof(window) != "undefined" && !window.isMobile) {
-    this.printLine('Please copy and paste the password in a safe place, then press "Next" below to continue.');
-    println("", this.target);
-    println("", this.target);
-  }
-  var password = computeCookie(this.stats, this.temps, this.lineNum, this.indent);
-  password = this.obfuscate(password);
-  showPassword(this.target, password);
-  this.prevLine = "block";
+
 };
 
 Scene.prototype.obfuscate = function obfuscate(password) {
@@ -3420,8 +3022,6 @@ Scene.prototype.delay_ending = function(data) {
           if (option == playMoreGames) {
             self.more_games("now");
             if (typeof curl != "undefined") curl();
-          } else if (option == emailMe) {
-            subscribeLink();
           } else if (option == upgradeSkip) {
             purchase("adfree", restartNow);
           } else if (option == skipOnce) {
