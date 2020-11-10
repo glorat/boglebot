@@ -4,31 +4,31 @@ This boglebot recommends your equity allocation be passively allocated across th
 
 We'll then help you find the low cost ways of achieving this
 
-For now, we assume you have 0% tax on dividends and 0% tax on capital gains and are affected by the typical 30% withholding tax on US dividends
+For now, we assume you have 0% tax on dividends and 0% tax on capital gains and are affected by the 15% withholding tax on US dividends afforded by Ireland domiciled ETFs (avoiding the default 30% tax)
 
 *label strategy
 What investing strategy would you like to try?
 *choice
     #Passive index funds
         Great choice! Passive funds are recommended by Bogleheads due to their low cost
- 
+
         *goto etfchoice
     #Actively managed funds
         Actively managed funds have higher fees than passive funds. Are you sure you wish to proceed with choosing an active fund?
         *choice
             #Yes - active funds
                 You invest your money in an active fund. 20 years later you realise that the odds of an active fund outperforming a passive index fund iess less than 1%. You enter your retirement in regret
-                
+
              *goto_scene ending
             #No - try something else
                  Let's try something else
-                 
+
                  *goto strategy
     #Pick individual stocks
         Unfortunately,
         *link https://jlcollinsnh.com/2011/06/02/why-i-cant-pick-winning-stocks-and-you-cant-either/ I can't pick winning stocks and you can't either
         . There are professionals that do make a living picking stocks. They are the people running actively managed funds. Since I can't help you pick stocks, try another strategy
-        
+
         *goto strategy
 
 *label etfchoice
@@ -37,24 +37,24 @@ We assume you will use exchange traded funds (ETFs) to create your portfolio
 What type of ETF shall we go for?
 
 *choice
-    #Global index fund
+    #Global index fund (recommended)
         *goto globalindex
     #Local market index fund
         By concentrating to just your local market, you are not really diversifying your portfolio and are leaving yourself with high concentration risk in the single country of your choice
-        
+
         *goto etfchoice
     #Follow the most popular ETF sectors
         ETFs that target specific portions of the market have typically higher costs compared to passive global index trackers. But trying to follow what is popular is a common strategy
         *choice
             #Proceed with following ETF trends
                 You invest in yourself like an average investor. Over time, this is how you did compared to just to sticking with passive funds
-                
+
                 *image averageinvestor.jpg
-                
+
                 *goto_scene ending
             #Try something else
                 *goto etfchoice
-        
+
 
 *label globalindex
 For equities, there are these recommended ways of buying the global market, depending on what you prefer
@@ -65,22 +65,23 @@ Based on the largest most popular ETF in its class, run by a profit making compa
 
 Based on the cheapest ETF in its class, run by a profit making company, also requiring you to manage two ETFs
 
-Choose an option to learn more or click "Ready to choose" when you have learned enough
+This is an important choice so you can take your time to review the explanations of all the choices below, before finally pressing "Ready to choose" when you have learned enough
 
 *choice
     #1) Single fund (recommended)
         Then I recommend the Vanguard FTSE All World ETF. The fund has an expense ratio of 0.22%, There are accumulating and distributing options.
-        
+
         Having a single equity fund maximizes simplicity and means you don't have to worry about balancing ratios or other time consuming activities. Time is money after all!
-        
+
         *goto globalindex
     # 2)Most popular fund
         The iShares Core MSCI World ETF (IWDA) is the most popular ETF in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.20%
-        
+
         *goto globalindex
     # 3) Cheapest Vanguard fund
         Vanguard has arguably the best reputation in the market for having customer interests before profits due to its corporate structure. They consistent lower their expenses when they can. The funds will have a combined expense ratio of about 0.14%
         *goto globalindex
+
     # 4) Cheapest fund
         The SPDR MSCI World ETF (SWRD) is a relatively new ETF that is the cheapest in its class, covering the developed world. In order to cover the global market, one also needs to cover emerging markets so you'll also need to invest in the iShares Core MSCI EM IMI (EIMI) ETF. You'll need to invest in these two funds in approximately an 88/12 proportion to match global market cap ratios. The funds will have a combined expense ratio of about 0.13%.
         *goto globalindex
@@ -108,11 +109,11 @@ It is time to choose your strategy
             *goto review
   #Vanguard cheap combo - Vangurard Developed World + Emerging Market (TER 0.14%)
       Splitting the All-World index into separate Developed World and Emerging Market funds works out cheaper - but you'll have two funds to manage.
-      
-      There are accumulating and distributing versions of this ETF. See 
+
+      There are accumulating and distributing versions of this ETF. See
       *link https://www.bogleheads.org/wiki/Comparison_of_accumulating_ETFs_and_distributing_ETFs
       for help on which is best for you. Usually the accumulating version is preferred unless there is some tax consideration or you wish to spend the dividend income
-      
+
       *choice
           #Accumulating - VHVE/VFEA (TER 0.14%)
             *set eqname1 "VHVE FTSE Developed World"
@@ -145,7 +146,7 @@ It is time to choose your strategy
     *goto review
   #Give me more advice
       *goto globalindex
-  
+
 *label review
 The equity portion of your portfolio is set to
 

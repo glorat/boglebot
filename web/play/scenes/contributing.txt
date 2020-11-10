@@ -1,6 +1,6 @@
 *comment Copyright 2019 by Kevin Tam.
 
-The boglebot is unable to help on this topic. But perhaps you are an expert that can teach me?
+The boglebot is unable to help on this topic. But perhaps you are an expert that can contribute?
 
 My knowledge maintained at
 *link https://github.com/glorat/boglebot/tree/master/web/play/scenes

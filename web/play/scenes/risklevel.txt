@@ -2,11 +2,12 @@
 
 What is your risk tolerance?
 
-One day I will guide you through this but for now please visit 
+In this section you indicate your risk tolerance, which drives your portfolio balance between equities bonds
+
+This is a highly personal decision. Websites that can help you on this topic include
 *link https://personal.vanguard.com/us/FundsInvQuestionnaire
-and 
+and
 *link https://www.bogleheads.org/wiki/Asset_allocation
-to guide yourself to an answer
 
 *choice
   #Very high - 100% equities

@@ -24,11 +24,11 @@
 *create eqter 0
 *create bondter 0
 
-Welcome to the unofficial Boglebot service!
+Welcome to the Boglebot two-fund portfolio tool!
 
-Your Boglebot financial advisor will help collect your thoughts on asset allocations and give you options on how to implement an international flavour of the "two fund portfolio" composed of a diversified global equity portfolio and a diversified bond portfolio.
+This Boglebot tool will help collect your inputs on asset allocations and give you options on how to implement an international flavour of the **"two fund portfolio"** composed of a diversified global equity portfolio and a diversified bond portfolio.
 
-Privacy policy: This website (boglebot.com) does not store any of your data. There are no cookes, no adverts, no logs. All the choices you make stay in your browser and disappear when you close it.
+Privacy policy: The two-fund portfolio tool does not store any of your data. There are no cookies, no adverts, no logs. All the choices you make stay in your browser and disappear when you close it.
 
 Disclaimer: No guarantees are made as to the accuracy of the information on this site or the appropriateness of any advice to your particular situation.
 
